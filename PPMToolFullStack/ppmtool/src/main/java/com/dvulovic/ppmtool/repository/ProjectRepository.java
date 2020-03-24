@@ -7,6 +7,12 @@ import com.dvulovic.ppmtool.domain.Project;
 
 @Repository
 public interface ProjectRepository extends CrudRepository<Project, Long>{
+	// get the Identifier
 	Project findByProjectIdentifier(String projectIdentifier);
+
+	@Override
+	Iterable<Project> findAll();
+	
+	
 	
 }
