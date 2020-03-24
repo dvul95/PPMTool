@@ -18,10 +18,12 @@ public class ProjectService {
 		try {
 			project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
 			return projectRepository.save(project);
-
 		} catch (Exception e) {
 			throw new ProjectIdException("Project Id '" + project.getProjectIdentifier().toUpperCase()+ "' already exists.");
-		}
-		
+		}			
+	}
+	
+	public Project findProjectByIdentifier(String projectIdentifier) {
+		return projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
 	}
 }
