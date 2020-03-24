@@ -44,12 +44,4 @@ public class ProjectController {
 		return new ResponseEntity<Project>(project, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/{projectIdentifier}")
-	public ResponseEntity<?> getProjectByIdentifier(@PathVariable String projectIdentifier) {
-
-		Project project = projectService.findProjectByIdentifier(projectIdentifier);
-
-		return new ResponseEntity<Project>(project, HttpStatus.OK);
-
-	}
 }
