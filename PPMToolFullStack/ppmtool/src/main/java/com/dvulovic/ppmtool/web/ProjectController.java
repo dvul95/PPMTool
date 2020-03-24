@@ -28,20 +28,29 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	private MapValidationErrorService mapValidationErrorService;
-	
+
 	@PostMapping("")
-	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult bindingResult){
-		
+	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult bindingResult) {
+
 		ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(bindingResult);
 		if (errorMap != null) {
 			return errorMap;
 		}
-		
+
 		Project p = projectService.saveOrUpdateProject(project);
 		return new ResponseEntity<Project>(project, HttpStatus.CREATED);
 	}
-	
+
+	@GetMapping("/{projectIdentifier}")
+	public ResponseEntity<?> getProjectByIdentifier(@PathVariable String projectIdentifier) {
+
+		Project project = projectService.findProjectByIdentifier(projectIdentifier);
+
+		return new ResponseEntity<Project>(project, HttpStatus.OK);
+
+	}
+
 }
