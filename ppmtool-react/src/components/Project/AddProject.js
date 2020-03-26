@@ -10,6 +10,12 @@ class AddProject extends Component {
       startDate: "",
       endDate: ""
     };
+
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
@@ -29,6 +35,7 @@ class AddProject extends Component {
                       placeholder="Project Name"
                       name="projectName"
                       value={this.state.projectName}
+                      onChange={this.onChange}
                     />
                   </div>
                   <div className="form-group">
@@ -38,6 +45,7 @@ class AddProject extends Component {
                       placeholder="Unique Project ID"
                       name="projectIdentifier"
                       value={this.state.projectIdentifier}
+                      onChange={this.onChange}
                     />
                   </div>
                   <div className="form-group">
@@ -46,6 +54,7 @@ class AddProject extends Component {
                       placeholder="Project Description"
                       name="projectDescription"
                       value={this.state.projectDescription}
+                      onChange={this.onChange}
                     ></textarea>
                   </div>
                   <h6>Start Date</h6>
@@ -55,16 +64,12 @@ class AddProject extends Component {
                       className="form-control form-control-lg"
                       name="startDate"
                       value={this.state.startDate}
+                      onChange={this.onChange}
                     />
                   </div>
                   <h6>Estimated End Date</h6>
                   <div className="form-group">
-                    <input
-                      type="date"
-                      className="form-control form-control-lg"
-                      name="endDate"
-                      value={this.state.endDate}
-                    />
+                    <input type="date" onChange={this.onChange} />
                   </div>
 
                   <input
