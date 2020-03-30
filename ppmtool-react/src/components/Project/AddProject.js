@@ -7,6 +7,7 @@ import classnames from "classnames";
 class AddProject extends Component {
   constructor() {
     super();
+
     this.state = {
       projectName: "",
       projectIdentifier: "",
@@ -20,15 +21,13 @@ class AddProject extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //Lifecycle hooks
-  //---------------
+  //life cycle hooks
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
-      this.setState({ errors: nextProps });
+      this.setState({ errors: nextProps.errors });
     }
   }
-  //----------------
-
+  // ----------------
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -36,7 +35,6 @@ class AddProject extends Component {
   onSubmit(e) {
     //prevents reloading
     e.preventDefault();
-
     const newProject = {
       projectName: this.state.projectName,
       projectIdentifier: this.state.projectIdentifier,
@@ -44,26 +42,25 @@ class AddProject extends Component {
       startDate: this.state.startDate,
       endDate: this.state.endDate
     };
-    // console.log(newProject);
     this.props.createProject(newProject, this.props.history);
   }
 
   render() {
     const { errors } = this.state;
+
     return (
-      // -- Form --
       <div>
         <div className="project">
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Project Form</h5>
+                <h5 className="display-4 text-center">Create Project form</h5>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <input
                       type="text"
-                      className={classnames("form-control form-control-lg ", {
+                      className={classnames("form-control form-control-lg", {
                         "is-invalid": errors.projectName
                       })}
                       placeholder="Project Name"
@@ -80,25 +77,35 @@ class AddProject extends Component {
                   <div className="form-group">
                     <input
                       type="text"
-                      className="form-control form-control-lg"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.projectIdentifier
+                      })}
                       placeholder="Unique Project ID"
                       name="projectIdentifier"
                       value={this.state.projectIdentifier}
                       onChange={this.onChange}
                     />
-
-                    <p>{errors.projectIdentifier}</p>
+                    {errors.projectIdentifier && (
+                      <div className="invalid-feedback">
+                        {errors.projectIdentifier}
+                      </div>
+                    )}
                   </div>
                   <div className="form-group">
                     <textarea
-                      className="form-control form-control-lg"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.projectDescription
+                      })}
                       placeholder="Project Description"
                       name="projectDescription"
                       value={this.state.projectDescription}
                       onChange={this.onChange}
-                    ></textarea>
-
-                    <p>{errors.projectDescription}</p>
+                    />
+                    {errors.description && (
+                      <div className="invalid-feedback">
+                        {errors.projectDescription}
+                      </div>
+                    )}
                   </div>
                   <h6>Start Date</h6>
                   <div className="form-group">
@@ -112,7 +119,13 @@ class AddProject extends Component {
                   </div>
                   <h6>Estimated End Date</h6>
                   <div className="form-group">
-                    <input type="date" onChange={this.onChange} />
+                    <input
+                      type="date"
+                      className="form-control form-control-lg"
+                      name="endDate"
+                      value={this.state.endDate}
+                      onChange={this.onChange}
+                    />
                   </div>
 
                   <input
