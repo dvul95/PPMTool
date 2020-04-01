@@ -73,6 +73,7 @@ class UpdateProject extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div className="project">
         <div className="container">
@@ -84,12 +85,17 @@ class UpdateProject extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg "
+                    className={classnames("form-control form-control-lg ", {
+                      "is-invalid": errors.projectName
+                    })}
                     placeholder="Project Name"
                     name="projectName"
                     value={this.state.projectName}
                     onChange={this.onChange}
                   />
+                  {errors.projectName && (
+                    <div className="invalid-feedback">{errors.projectName}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
@@ -103,12 +109,17 @@ class UpdateProject extends Component {
                 </div>
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.projectDescription
+                    })}
                     placeholder="Project Description"
                     name="projectDescription"
                     value={this.state.projectDescription}
                     onChange={this.onChange}
                   ></textarea>
+                  <div className="invalid-feedback">
+                    {errors.projectDescription}
+                  </div>
                 </div>
                 <h6>Start Date</h6>
                 <div className="form-group">
