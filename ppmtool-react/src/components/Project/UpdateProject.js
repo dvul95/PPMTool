@@ -14,7 +14,8 @@ class UpdateProject extends Component {
       projectIdentifier: "",
       projectDescription: "",
       startDate: "",
-      endDate: ""
+      endDate: "",
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -24,6 +25,10 @@ class UpdateProject extends Component {
   //Lifecycle hook
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+
     const {
       id,
       projectName,
@@ -141,11 +146,13 @@ class UpdateProject extends Component {
 UpdateProject.propTypes = {
   getProject: PropTypes.func.isRequired,
   createProject: PropTypes.func.isRequired,
-  project: PropTypes.object.isRequired
+  project: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  project: state.project.project
+  project: state.project.project,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, { getProject, createProject })(
