@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getProject } from "../../actions/ProjectActions";
+import { getProject, createProject } from "../../actions/ProjectActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
@@ -16,6 +16,9 @@ class UpdateProject extends Component {
       startDate: "",
       endDate: ""
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   //Lifecycle hook
@@ -45,6 +48,25 @@ class UpdateProject extends Component {
     this.props.getProject(id, this.props.history);
   }
 
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const UpdateProject = {
+      id: this.state.id,
+      projectName: this.state.projectName,
+      projectIdentifier: this.state.projectIdentifier,
+      projectDescription: this.state.projectDescription,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate
+    };
+
+    this.props.createProject(UpdateProject, this.props.history);
+  }
+
   render() {
     return (
       <div className="project">
@@ -53,7 +75,7 @@ class UpdateProject extends Component {
             <div className="col-md-8 m-auto">
               <h5 className="display-4 text-center">Edit Project</h5>
               <hr />
-              <form>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -61,6 +83,7 @@ class UpdateProject extends Component {
                     placeholder="Project Name"
                     name="projectName"
                     value={this.state.projectName}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -79,6 +102,7 @@ class UpdateProject extends Component {
                     placeholder="Project Description"
                     name="projectDescription"
                     value={this.state.projectDescription}
+                    onChange={this.onChange}
                   ></textarea>
                 </div>
                 <h6>Start Date</h6>
@@ -97,6 +121,7 @@ class UpdateProject extends Component {
                     className="form-control form-control-lg"
                     name="endDate"
                     value={this.state.endDate}
+                    onChange={this.onChange}
                   />
                 </div>
 
@@ -115,6 +140,7 @@ class UpdateProject extends Component {
 
 UpdateProject.propTypes = {
   getProject: PropTypes.func.isRequired,
+  createProject: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired
 };
 
@@ -122,4 +148,6 @@ const mapStateToProps = state => ({
   project: state.project.project
 });
 
-export default connect(mapStateToProps, { getProject })(UpdateProject);
+export default connect(mapStateToProps, { getProject, createProject })(
+  UpdateProject
+);
