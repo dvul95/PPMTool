@@ -24,146 +24,113 @@ public class ProjectTask {
 	private String status;
 	private Integer priority;
 	private Date dueDate;
-	
+
 	@Column(updatable = false)
 	private String projectIdentifier;
-	
+
 	private Date createdAt;
 	private Date updatedAt;
-	
+
 	public ProjectTask() {
-		
+
 	}
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
 	public String getProjectSequence() {
 		return projectSequence;
 	}
-
-
 
 	public void setProjectSequence(String projectSequence) {
 		this.projectSequence = projectSequence;
 	}
 
-
-
 	public String getSummary() {
 		return summary;
 	}
-
-
 
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
 
-
-
 	public String getAccCriteria() {
 		return accCriteria;
 	}
-
-
 
 	public void setAccCriteria(String accCriteria) {
 		this.accCriteria = accCriteria;
 	}
 
-
-
 	public String getStatus() {
 		return status;
 	}
-
-
 
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-
-
 	public Integer getPriority() {
 		return priority;
 	}
-
-
 
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
 
-
-
 	public Date getDueDate() {
 		return dueDate;
 	}
-
-
 
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
 
-
-
 	public String getProjectIdentifier() {
 		return projectIdentifier;
 	}
-
-
 
 	public void setProjectIdentifier(String projectIdentifier) {
 		this.projectIdentifier = projectIdentifier;
 	}
 
-
-
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-
-
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-
-
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-
-
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-
-
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = new Date();
 	}
-	
+
 	@PreUpdate
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"ProjectTask [id=%s, projectSequence=%s, summary=%s, accCriteria=%s, status=%s, priority=%s, dueDate=%s, projectIdentifier=%s, createdAt=%s, updatedAt=%s]",
+				id, projectSequence, summary, accCriteria, status, priority, dueDate, projectIdentifier, createdAt,
+				updatedAt);
+	}
+
 }
