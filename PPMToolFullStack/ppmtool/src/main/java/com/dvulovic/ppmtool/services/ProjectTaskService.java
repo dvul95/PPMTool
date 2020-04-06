@@ -45,7 +45,7 @@ public class ProjectTaskService {
 		
 	}
 
-	public List<ProjectTask> findBacklogById(String backlog_id) {
-		return null;
+	public Iterable<ProjectTask> findBacklogById(String backlog_id) {
+		return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
 	}
 }
