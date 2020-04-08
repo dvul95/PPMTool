@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dvulovic.ppmtool.domain.Backlog;
+import com.dvulovic.ppmtool.domain.Project;
 import com.dvulovic.ppmtool.domain.ProjectTask;
 import com.dvulovic.ppmtool.exceptions.ProjectIdException;
 import com.dvulovic.ppmtool.exceptions.ProjectNotFoundException;
 import com.dvulovic.ppmtool.repository.BacklogRepository;
+import com.dvulovic.ppmtool.repository.ProjectRepository;
 import com.dvulovic.ppmtool.repository.ProjectTaskRepository;
 
 @Service
@@ -20,6 +22,9 @@ public class ProjectTaskService {
 
 	@Autowired
 	private ProjectTaskRepository projectTaskRepository;
+
+	@Autowired
+	private ProjectRepository projectRepository;
 
 	public ProjectTask addProjectTask(String projectIdentifier, ProjectTask projectTask) {
 
@@ -49,6 +54,16 @@ public class ProjectTaskService {
 	}
 
 	public Iterable<ProjectTask> findBacklogById(String backlog_id) {
+		Project project = projectRepository.findByProjectIdentifier(backlog_id);
+
+		if (project == null) {
+			throw new ProjectNotFoundException("Project with the Id: '" + backlog_id + "' does not exist.");
+		}
+
 		return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlog_id);
+	}
+
+	public ProjectTask findProjectTaskBySequence(String backlog_id, String pt_id) {
+		return projectTaskRepository.findByProjectSequence(pt_id);
 	}
 }
