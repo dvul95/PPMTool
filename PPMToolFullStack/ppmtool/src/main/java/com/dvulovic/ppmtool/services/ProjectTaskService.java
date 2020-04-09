@@ -86,10 +86,23 @@ public class ProjectTaskService {
 	//update projectTask 
 	
 	public ProjectTask updateByProjectSequence(ProjectTask updatedTask, String backlog_id, String pt_id) {
-		ProjectTask projectTask = projectTaskRepository.findByProjectSequence(updatedTask.getProjectSequence());
+		ProjectTask projectTask = findProjectTaskBySequence(backlog_id, pt_id);
 		
 		projectTask = updatedTask;
 		
 		return projectTaskRepository.save(projectTask);
+	}
+	
+	//delete task
+	
+	public void deleteProjectTaskBySequence(String backlog_id, String pt_id) {
+		ProjectTask projectTask = findProjectTaskBySequence(backlog_id, pt_id);
+		
+		Backlog backlog = projectTask.getBacklog();
+		
+		List<ProjectTask> projectTasks = backlog.getProjectTasks();
+		projectTasks.remove(projectTask);
+		backlogRepository.save(backlog);
+		projectTaskRepository.delete(projectTask);
 	}
 }
