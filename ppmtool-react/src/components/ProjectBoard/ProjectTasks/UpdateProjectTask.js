@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import PropTypes from "prop-types";
+import { getProjectTask } from "../../../actions/BacklogActions";
 
 class UpdateProjectTask extends Component {
+  //hook
+  componentDidMount() {
+    const { backlog_id, pt_id } = this.props.match.params;
+    this.props.getProjectTask(backlog_id, pt_id, this.props.history);
+  }
+
   render() {
     return (
       <div className="add-PBI">
@@ -10,9 +20,7 @@ class UpdateProjectTask extends Component {
               <a href="#" className="btn btn-light">
                 Back to Project Board
               </a>
-              <h4 className="display-4 text-center">
-                Add /Update Project Task
-              </h4>
+              <h4 className="display-4 text-center">Update Project Task</h4>
               <p className="lead text-center">Project Name + Project Code</p>
               <form>
                 <div className="form-group">
@@ -75,4 +83,13 @@ class UpdateProjectTask extends Component {
   }
 }
 
-export default UpdateProjectTask;
+UpdateProjectTask.propTypes = {
+  getProjectTask: PropTypes.func.isRequired,
+  project_task: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  project_task: state.backlog.project_task,
+});
+
+export default connect(mapStateToProps, { getProjectTask })(UpdateProjectTask);
