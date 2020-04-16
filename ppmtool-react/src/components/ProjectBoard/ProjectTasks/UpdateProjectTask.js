@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import PropTypes from "prop-types";
 import { getProjectTask } from "../../../actions/BacklogActions";
+import PropTypes from "prop-types";
 
 class UpdateProjectTask extends Component {
   //hook
@@ -35,7 +35,7 @@ class UpdateProjectTask extends Component {
                   <textarea
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
-                    name="acceptanceCriteria"
+                    name="accCriteria"
                   ></textarea>
                 </div>
                 <h6>Due Date</h6>

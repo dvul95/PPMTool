@@ -38,7 +38,7 @@ export const getProjectTask = (backlog_id, pt_id, history) => async (
   dispatch
 ) => {
   try {
-    const res = await axios.get(`api/backlog/${backlog_id}/${pt_id}`);
+    const res = await axios.get(`/api/backlog/${backlog_id}/${pt_id}`);
     dispatch({
       type: GET_PROJECT_TASK,
       payload: res.data,
