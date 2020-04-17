@@ -5,10 +5,52 @@ import { getProjectTask } from "../../../actions/BacklogActions";
 import PropTypes from "prop-types";
 
 class UpdateProjectTask extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      id: "",
+      projectSequence: "",
+      summary: "",
+      accCriteria: "",
+      status: "",
+      priority: "",
+      dueDate: "",
+      projectIdentifier: "",
+      createdAt: "",
+    };
+  }
+
   //hook
   componentDidMount() {
     const { backlog_id, pt_id } = this.props.match.params;
     this.props.getProjectTask(backlog_id, pt_id, this.props.history);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      id,
+      projectSequence,
+      summary,
+      accCriteria,
+      status,
+      priority,
+      dueDate,
+      projectIdentifier,
+      createdAt,
+    } = nextProps.project_task;
+
+    this.setState({
+      id,
+      projectSequence,
+      summary,
+      accCriteria,
+      status,
+      priority,
+      dueDate,
+      projectIdentifier,
+      createdAt,
+    });
   }
 
   render() {
@@ -21,7 +63,10 @@ class UpdateProjectTask extends Component {
                 Back to Project Board
               </a>
               <h4 className="display-4 text-center">Update Project Task</h4>
-              <p className="lead text-center">Project Name + Project Code</p>
+              <p className="lead text-center">
+                Project Name: {this.state.projectIdentifier} + Project Task ID:{" "}
+                {this.state.projectSequence}
+              </p>
               <form>
                 <div className="form-group">
                   <input
@@ -29,6 +74,7 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="summary"
                     placeholder="Project Task summary"
+                    value={this.state.summary}
                   />
                 </div>
                 <div className="form-group">
@@ -36,6 +82,7 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
                     name="accCriteria"
+                    value={this.state.accCriteria}
                   ></textarea>
                 </div>
                 <h6>Due Date</h6>
@@ -44,12 +91,14 @@ class UpdateProjectTask extends Component {
                     type="date"
                     className="form-control form-control-lg"
                     name="dueDate"
+                    value={this.state.dueDate}
                   />
                 </div>
                 <div className="form-group">
                   <select
                     className="form-control form-control-lg"
                     name="priority"
+                    value={this.state.priority}
                   >
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
@@ -62,6 +111,7 @@ class UpdateProjectTask extends Component {
                   <select
                     className="form-control form-control-lg"
                     name="status"
+                    value={this.state.status}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
