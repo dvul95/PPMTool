@@ -19,6 +19,9 @@ class UpdateProjectTask extends Component {
       projectIdentifier: "",
       createdAt: "",
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   //hook
@@ -53,6 +56,27 @@ class UpdateProjectTask extends Component {
     });
   }
 
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const updateProjectTask = {
+      id: this.state.id,
+      projectSequence: this.state.projectSequence,
+      summary: this.state.summary,
+      accCriteria: this.state.accCriteria,
+      status: this.state.status,
+      priority: this.state.priority,
+      dueDate: this.state.dueDate,
+      projectIdentifier: this.state.projectIdentifier,
+      createdAt: this.state.createdAt,
+    };
+    console.log(updateProjectTask);
+  }
+
   render() {
     return (
       <div className="add-PBI">
@@ -67,7 +91,7 @@ class UpdateProjectTask extends Component {
                 Project Name: {this.state.projectIdentifier} + Project Task ID:{" "}
                 {this.state.projectSequence}
               </p>
-              <form>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -75,6 +99,7 @@ class UpdateProjectTask extends Component {
                     name="summary"
                     placeholder="Project Task summary"
                     value={this.state.summary}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -83,6 +108,7 @@ class UpdateProjectTask extends Component {
                     placeholder="Acceptance Criteria"
                     name="accCriteria"
                     value={this.state.accCriteria}
+                    onChange={this.onChange}
                   ></textarea>
                 </div>
                 <h6>Due Date</h6>
@@ -92,6 +118,7 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="dueDate"
                     value={this.state.dueDate}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -99,6 +126,7 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="priority"
                     value={this.state.priority}
+                    onChange={this.onChange}
                   >
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
@@ -112,6 +140,7 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="status"
                     value={this.state.status}
+                    onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
