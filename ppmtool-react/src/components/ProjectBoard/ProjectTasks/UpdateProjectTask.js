@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { getProjectTask } from "../../../actions/BacklogActions";
+import {
+  getProjectTask,
+  updateProjectTask,
+} from "../../../actions/BacklogActions";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 class UpdateProjectTask extends Component {
   constructor() {
@@ -74,7 +78,14 @@ class UpdateProjectTask extends Component {
       projectIdentifier: this.state.projectIdentifier,
       createdAt: this.state.createdAt,
     };
-    console.log(updateProjectTask);
+
+    // console.log(updateProjectTask);
+    this.props.updateProjectTask(
+      this.state.projectIdentifier,
+      this.state.projectSequence,
+      updateProjectTask,
+      this.props.history
+    );
   }
 
   render() {
@@ -83,9 +94,12 @@ class UpdateProjectTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <a href="#" className="btn btn-light">
+              <Link
+                to={`/projectBoard/${this.state.projectIdentifier}`}
+                className="btn btn-light"
+              >
                 Back to Project Board
-              </a>
+              </Link>
               <h4 className="display-4 text-center">Update Project Task</h4>
               <p className="lead text-center">
                 Project Name: {this.state.projectIdentifier} + Project Task ID:{" "}
@@ -165,10 +179,15 @@ class UpdateProjectTask extends Component {
 UpdateProjectTask.propTypes = {
   getProjectTask: PropTypes.func.isRequired,
   project_task: PropTypes.object.isRequired,
+  updateProjectTask: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   project_task: state.backlog.project_task,
+  errors: state.errors,
 });
 
-export default connect(mapStateToProps, { getProjectTask })(UpdateProjectTask);
+export default connect(mapStateToProps, { getProjectTask, updateProjectTask })(
+  UpdateProjectTask
+);
