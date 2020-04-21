@@ -22,6 +22,7 @@ class UpdateProjectTask extends Component {
       dueDate: "",
       projectIdentifier: "",
       createdAt: "",
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -35,6 +36,10 @@ class UpdateProjectTask extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+
     const {
       id,
       projectSequence,
@@ -89,6 +94,7 @@ class UpdateProjectTask extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div className="add-PBI">
         <div className="container">
@@ -109,12 +115,17 @@ class UpdateProjectTask extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.summary,
+                    })}
                     name="summary"
                     placeholder="Project Task summary"
                     value={this.state.summary}
                     onChange={this.onChange}
                   />
+                  {errors.summary && (
+                    <div className="invalid-feedback">{errors.summary}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <textarea
