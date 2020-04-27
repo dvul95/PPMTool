@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+
 import static com.dvulovic.ppmtool.security.SecurityConstants.EXPIRATION_TIME;
 import static com.dvulovic.ppmtool.security.SecurityConstants.SECRET;
 
@@ -13,6 +15,7 @@ import com.dvulovic.ppmtool.domain.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class JwtTokenProvider {
 	
 	//Method to generate the token
