@@ -105,6 +105,17 @@ public class User implements UserDetails{
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+	
+	//-----------------------------------
+
 
 	@PrePersist
 	protected void onCreate() {

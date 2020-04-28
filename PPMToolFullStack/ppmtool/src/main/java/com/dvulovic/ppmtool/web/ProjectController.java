@@ -1,5 +1,6 @@
 package com.dvulovic.ppmtool.web;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,14 +37,14 @@ public class ProjectController {
 	private MapValidationErrorService mapValidationErrorService;
 
 	@PostMapping("")
-	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult bindingResult) {
+	public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult bindingResult, Principal principal) {
 
 		ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(bindingResult);
 		if (errorMap != null) {
 			return errorMap;
 		}
 
-		Project p = projectService.saveOrUpdateProject(project);
+		Project p = projectService.saveOrUpdateProject(project, principal.getName());
 		return new ResponseEntity<Project>(project, HttpStatus.CREATED);
 	}
 	
