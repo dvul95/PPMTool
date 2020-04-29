@@ -32,6 +32,8 @@ public class ProjectService {
 			
 			if (existingProject != null && (!existingProject.getProjectLeader().equals(username))) {
 				throw new ProjectNotFoundException("Project not found in this account");
+			}else if(existingProject == null) {
+				throw new ProjectNotFoundException("Project with ID: '" + project.getProjectIdentifier() + "' can't be updated. It doesn't exist.");
 			}
 		}
 		
