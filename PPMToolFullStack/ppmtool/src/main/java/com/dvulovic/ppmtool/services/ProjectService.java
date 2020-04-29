@@ -70,13 +70,8 @@ public class ProjectService {
 	}
 	
 	//Delete the project
-	public void deleteProjectByIdentifier(String projectIdentifier) {
+	public void deleteProjectByIdentifier(String projectIdentifier, String username) {
 		
-		Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
-		if (project == null) {
-			throw new ProjectIdException("Cannot delete project with the Identifier '" + projectIdentifier +"'. The project does not exist.");
-		}
-		
-		projectRepository.delete(project);
+		projectRepository.delete(findProjectByIdentifier(projectIdentifier, username));
 	}
 }

@@ -67,8 +67,8 @@ public class ProjectController {
 	
 	//DELETE 
 	@DeleteMapping("/{projectIdentifier}")
-	public ResponseEntity<?> deleteProject(@PathVariable String projectIdentifier){
-		projectService.deleteProjectByIdentifier(projectIdentifier);
+	public ResponseEntity<?> deleteProject(@PathVariable String projectIdentifier, Principal principal){
+		projectService.deleteProjectByIdentifier(projectIdentifier, principal.getName());
 		return new ResponseEntity<String>("Project with Identifier '" +projectIdentifier +"' was successfully deleted .", HttpStatus.OK);
 	}
 
