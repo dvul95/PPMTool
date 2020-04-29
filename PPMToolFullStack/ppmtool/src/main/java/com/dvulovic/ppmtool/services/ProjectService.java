@@ -24,7 +24,16 @@ public class ProjectService {
 	@Autowired
 	UserRepository userRepository;
 	
+	//Create / Update 
 	public Project saveOrUpdateProject(Project project, String username) {
+		
+		if (project.getId() != null) {
+			Project existingProject = projectRepository.findByProjectIdentifier(project.getProjectIdentifier());
+			
+			if (existingProject != null && (!existingProject.getProjectLeader().equals(username))) {
+				throw new ProjectNotFoundException("Project not found in this account");
+			}
+		}
 		
 		try {
 			
