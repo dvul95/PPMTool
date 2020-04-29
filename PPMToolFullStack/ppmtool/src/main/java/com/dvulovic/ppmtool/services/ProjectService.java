@@ -7,6 +7,7 @@ import com.dvulovic.ppmtool.domain.Backlog;
 import com.dvulovic.ppmtool.domain.Project;
 import com.dvulovic.ppmtool.domain.User;
 import com.dvulovic.ppmtool.exceptions.ProjectIdException;
+import com.dvulovic.ppmtool.exceptions.ProjectNotFoundException;
 import com.dvulovic.ppmtool.repository.BacklogRepository;
 import com.dvulovic.ppmtool.repository.ProjectRepository;
 import com.dvulovic.ppmtool.repository.UserRepository;
@@ -48,14 +49,21 @@ public class ProjectService {
 			throw new ProjectIdException("Project Id '" + project.getProjectIdentifier().toUpperCase()+ "' already exists.");
 		}			
 	}
+	
 	//get the Project by Identifier
-	public Project findProjectByIdentifier(String projectIdentifier) {
+	public Project findProjectByIdentifier(String projectIdentifier, String username) {	
 		Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
+		
 		if (project == null) {
 			throw new ProjectIdException("Project Id '" + projectIdentifier + "' does not exist.");
 		}
+		
+		if (!project.getProjectLeader().equals(username)) {
+			throw new ProjectNotFoundException("Project not found in this account!");
+		}
 		return project;
 	}
+	
 	//Get all Projects
 	public Iterable<Project> findAllProjects(String username){
 		return projectRepository.findAllByProjectLeader(username);
