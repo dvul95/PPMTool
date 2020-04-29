@@ -57,10 +57,11 @@ public class ProjectService {
 		return project;
 	}
 	//Get all Projects
-	public Iterable<Project> findAllProjects(){
-		return projectRepository.findAll();
+	public Iterable<Project> findAllProjects(String username){
+		return projectRepository.findAllByProjectLeader(username);
 	}
 	
+	//Delete the project
 	public void deleteProjectByIdentifier(String projectIdentifier) {
 		
 		Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
