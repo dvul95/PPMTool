@@ -14,10 +14,7 @@ class Landing extends Component {
                 </h1>
                 <p className="lead">Create an account to add your projects</p>
                 <hr />
-                <Link
-                  className="btn btn-lg btn-primary mr-2"
-                  to="/registration"
-                >
+                <Link className="btn btn-lg btn-primary mr-2" to="/register">
                   Sign Up
                 </Link>
                 <Link className="btn btn-lg btn-secondary mr-2" to="/login">

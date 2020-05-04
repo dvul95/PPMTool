@@ -8,3 +8,7 @@ export const DELETE_PROJECT = "DELETE_PROJECT";
 export const GET_BACKLOG = "GET_BACKLOG";
 export const GET_PROJECT_TASK = "GET_PROJECT_TASK";
 export const DELETE_PROJECT_TASK = "DELETE_PROJECT_TASK";
+
+// user security
+
+export const SET_CURR_USER = "SET_CURR_USER";
