@@ -13,6 +13,8 @@ import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTasks/AddProjectTask";
 import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
 import Landing from "./components/Layout/Landing";
+import Register from "./components/UserManagement/Register";
+import Login from "./components/UserManagement/Login";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Header />
 
           <Route exact path="/" component={Landing} />
+          <Route exact path="/registration" component={Register} />
+          <Route exact path="/login" component={Login} />
 
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/addProject" component={AddProject} />
