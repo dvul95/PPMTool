@@ -24,7 +24,7 @@ public class UserValidator implements Validator{
 		}
 		
 		if (!user.getPassword().equals(user.getConfirmedPassword())) {
-			errors.rejectValue("password", "Match", "Passwords must match");
+			errors.rejectValue("confirmedPassword", "Match", "Passwords must match");
 		}
 		
 	}
