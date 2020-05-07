@@ -34,7 +34,16 @@ export const login = (LoginRequest) => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: GET_ERRORS,
-      payload: e.res.data,
+      payload: e.response.data,
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("jwtToken");
+  setJWToken(false);
+  dispatch({
+    type: SET_CURR_USER,
+    payload: {},
+  });
 };
