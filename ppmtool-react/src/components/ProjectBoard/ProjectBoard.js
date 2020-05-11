@@ -49,7 +49,7 @@ class ProjectBoard extends Component {
         } else {
           return (
             <div className="alert alert-info text-center" role="alert">
-              No project tasks on this board.
+              No project tasks on this board
             </div>
           );
         }

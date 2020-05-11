@@ -31,7 +31,7 @@ class ProjectItem extends Component {
                 </Link>
                 <Link to={`/updateProject/${project.projectIdentifier}`}>
                   <li className="list-group-item update">
-                    <i className="fa fa-edit pr-1"> Update Project Info</i>
+                    <i className="fa fa-edit pr-1"> Update Project </i>
                   </li>
                 </Link>
 

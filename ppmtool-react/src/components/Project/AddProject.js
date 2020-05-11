@@ -14,7 +14,7 @@ class AddProject extends Component {
       projectDescription: "",
       startDate: "",
       endDate: "",
-      errors: {}
+      errors: {},
     };
 
     this.onChange = this.onChange.bind(this);
@@ -40,7 +40,7 @@ class AddProject extends Component {
       projectIdentifier: this.state.projectIdentifier,
       projectDescription: this.state.projectDescription,
       startDate: this.state.startDate,
-      endDate: this.state.endDate
+      endDate: this.state.endDate,
     };
     this.props.createProject(newProject, this.props.history);
   }
@@ -54,14 +54,14 @@ class AddProject extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">Create Project form</h5>
+                <h5 className="display-4 text-center">Create Project</h5>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.projectName
+                        "is-invalid": errors.projectName,
                       })}
                       placeholder="Project Name"
                       name="projectName"
@@ -78,7 +78,7 @@ class AddProject extends Component {
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.projectIdentifier
+                        "is-invalid": errors.projectIdentifier,
                       })}
                       placeholder="Unique Project ID"
                       name="projectIdentifier"
@@ -94,7 +94,7 @@ class AddProject extends Component {
                   <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.projectDescription
+                        "is-invalid": errors.projectDescription,
                       })}
                       placeholder="Project Description"
                       name="projectDescription"
@@ -144,11 +144,11 @@ class AddProject extends Component {
 
 AddProject.propTypes = {
   createProject: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  errors: state.errors
+const mapStateToProps = (state) => ({
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { createProject })(AddProject);
