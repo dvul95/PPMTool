@@ -19,7 +19,7 @@ class Backlog extends Component {
       //console.log(tasks[i]);
 
       //TODO items
-      if (tasks[i].props.project_task.status === "TODO") {
+      if (tasks[i].props.project_task.status === "TO_DO") {
         todoList.push(tasks[i]);
       }
       //In progress items
